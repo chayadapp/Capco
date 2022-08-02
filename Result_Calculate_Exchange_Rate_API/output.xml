@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.9.13 on darwin)" generated="20220803 02:50:37.604" rpa="false" schemaversion="3">
+<suite id="s1" name="Calculate Exchange Rate API" source="/Users/cto/Desktop/Capco/testcases/Calculate_Exchange_Rate_API.robot">
+<test id="s1-t1" name="Verify result in case input correct source currency destination currency and correct amount in request body" line="11">
+<kw name="Set Body Calculate Exchange Rate API" library="Calculate_Exchange_Rate_API_Keywords">
+<arg>${source_currency_thb}</arg>
+<arg>${destination_currency_usd}</arg>
+<arg>${amount_int}</arg>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${body}</var>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220803 02:50:37.748" level="INFO">${body} = {}</msg>
+<status status="PASS" starttime="20220803 02:50:37.747" endtime="20220803 02:50:37.748"/>
+</kw>
+<if>
+<branch type="IF" condition="'${sourceCurrency}' != '${not_send_flag}'">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${body}</arg>
+<arg>sourceCurrency=${sourceCurrency}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20220803 02:50:37.748" endtime="20220803 02:50:37.748"/>
+</kw>
+<status status="PASS" starttime="20220803 02:50:37.748" endtime="20220803 02:50:37.749"/>
+</branch>
+<status status="PASS" starttime="20220803 02:50:37.748" endtime="20220803 02:50:37.749"/>
+</if>
+<if>
+<branch type="IF" condition="'${destinationCurrency}' != '${not_send_flag}'">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${body}</arg>
+<arg>destinationCurrency=${destinationCurrency}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20220803 02:50:37.749" endtime="20220803 02:50:37.749"/>
+</kw>
+<status status="PASS" starttime="20220803 02:50:37.749" endtime="20220803 02:50:37.749"/>
+</branch>
+<status status="PASS" starttime="20220803 02:50:37.749" endtime="20220803 02:50:37.749"/>
+</if>
+<if>
+<branch type="IF" condition="'${amount}' != '${not_send_flag}'">
+<kw name="Convert To Integer" library="BuiltIn">
+<var>${amount}</var>
+<arg>${amount}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<msg timestamp="20220803 02:50:37.750" level="INFO">${amount} = 1000</msg>
+<status status="PASS" starttime="20220803 02:50:37.750" endtime="20220803 02:50:37.750"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${body}</arg>
+<arg>amount=${amount}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20220803 02:50:37.750" endtime="20220803 02:50:37.750"/>
+</kw>
+<status status="PASS" starttime="20220803 02:50:37.749" endtime="20220803 02:50:37.750"/>
+</branch>
+<status status="PASS" starttime="20220803 02:50:37.749" endtime="20220803 02:50:37.750"/>
+</if>
+<kw name="Evaluate" library="BuiltIn">
+<var>${body}</var>
+<arg>json.dumps(${body})</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20220803 02:50:37.751" level="INFO">${body} = {"sourceCurrency": "THB", "destinationCurrency": "USD", "amount": 1000}</msg>
+<status status="PASS" starttime="20220803 02:50:37.750" endtime="20220803 02:50:37.751"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${body}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20220803 02:50:37.751" level="INFO">${body} = {"sourceCurrency": "THB", "destinationCurrency": "USD", "amount": 1000}</msg>
+<status status="PASS" starttime="20220803 02:50:37.751" endtime="20220803 02:50:37.751"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>RequestBody ${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220803 02:50:37.751" endtime="20220803 02:50:37.752"/>
+</kw>
+<status status="PASS" starttime="20220803 02:50:37.747" endtime="20220803 02:50:37.752"/>
+</kw>
+<kw name="Send Request Calculate Exchange Rate API" library="Calculate_Exchange_Rate_API_Keywords">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220803 02:50:37.753" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20220803 02:50:37.752" endtime="20220803 02:50:37.753"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>CalculateExchageRateAPI</arg>
+<arg>${host_url}</arg>
+<arg>disable_warnings=1</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220803 02:50:37.753" level="INFO">Creating Session using : alias=CalculateExchageRateAPI, url=https://thawing-river-85770.herokuapp.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220803 02:50:37.753" endtime="20220803 02:50:37.753"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>alias=CalculateExchageRateAPI</arg>
+<arg>url=${exchange_rate_uri}</arg>
+<arg>headers=${header}</arg>
+<arg>data=${body}</arg>
+<arg>expected_status=Anything</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20220803 02:50:39.054" level="INFO">POST Request : url=https://thawing-river-85770.herokuapp.com/exchange-rate 
+ path_url=/exchange-rate 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '71'} 
+ body={"sourceCurrency": "THB", "destinationCurrency": "USD", "amount": 1000} 
+ </msg>
+<msg timestamp="20220803 02:50:39.054" level="INFO">POST Response : url=https://thawing-river-85770.herokuapp.com/exchange-rate 
+ status=200, reason=OK 
+ headers={'Server': 'Cowboy', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '100', 'Etag': 'W/"64-1q33x/vOcZnX+GAluLQt+tRwu0Y"', 'Date': 'Tue, 02 Aug 2022 19:50:38 GMT', 'Via': '1.1 vegur'} 
+ body={"sourceCurrency":"THB","destinationCurrency":"USD","amount":1000,"convertedAmount":28,"rate":0.028} 
+ </msg>
+<msg timestamp="20220803 02:50:39.055" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220803 02:50:37.753" endtime="20220803 02:50:39.055"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>${response.status_code}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20220803 02:50:39.058" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20220803 02:50:39.055" endtime="20220803 02:50:39.058"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${response_body}</arg>
+<arg>${response.json()}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20220803 02:50:39.060" level="INFO">${response_body} = {'sourceCurrency': 'THB', 'destinationCurrency': 'USD', 'amount': 1000, 'convertedAmount': 28, 'rate': 0.028}</msg>
+<status status="PASS" starttime="20220803 02:50:39.058" endtime="20220803 02:50:39.060"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response_body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220803 02:50:39.060" endtime="20220803 02:50:39.061"/>
+</kw>
+<status status="PASS" starttime="20220803 02:50:37.752" endtime="20220803 02:50:39.061"/>
+</kw>
+<kw name="Validate Status Code Should Be Correct" library="Calculate_Exchange_Rate_API_Keywords">
+<arg>200</arg>
+<arg>${status_code}</arg>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${expected_status_code}</arg>
+<arg>${actual_status_code}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220803 02:50:39.062" level="INFO">Argument types are:
+&lt;class 'str'&gt;
+&lt;class 'int'&gt;</msg>
+<status status="PASS" starttime="20220803 02:50:39.062" endtime="20220803 02:50:39.062"/>
+</kw>
+<status status="PASS" starttime="20220803 02:50:39.061" endtime="20220803 02:50:39.063"/>
+</kw>
+<kw name="Validate Response Body Should Be Correct" library="Calculate_Exchange_Rate_API_Keywords">
+<arg>${source_currency_thb}</arg>
+<arg>${destination_currency_usd}</arg>
+<arg>${amount_int}</arg>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${actual_source_currency}</arg>
+<arg>${response_body['sourceCurrency']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20220803 02:50:39.066" level="INFO">${actual_source_currency} = THB</msg>
+<status status="PASS" starttime="20220803 02:50:39.064" endtime="20220803 02:50:39.066"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${actual_destination_currency}</arg>
+<arg>${response_body['destinationCurrency']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20220803 02:50:39.068" level="INFO">${actual_destination_currency} = USD</msg>
+<status status="PASS" starttime="20220803 02:50:39.066" endtime="20220803 02:50:39.068"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${actual_amount}</arg>
+<arg>${response_body['amount']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20220803 02:50:39.070" level="INFO">${actual_amount} = 1000</msg>
+<status status="PASS" starttime="20220803 02:50:39.068" endtime="20220803 02:50:39.070"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${actual_convert_amount}</arg>
+<arg>${response_body['convertedAmount']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20220803 02:50:39.072" level="INFO">${actual_convert_amount} = 28</msg>
+<status status="PASS" starttime="20220803 02:50:39.070" endtime="20220803 02:50:39.073"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${actual_rate}</arg>
+<arg>${response_body['rate']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20220803 02:50:39.075" level="INFO">${actual_rate} = 0.028</msg>
+<status status="PASS" starttime="20220803 02:50:39.073" endtime="20220803 02:50:39.075"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${expected_source_currency}</arg>
+<arg>${actual_source_currency}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220803 02:50:39.075" endtime="20220803 02:50:39.076"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${expected_destination_currency}</arg>
+<arg>${actual_destination_currency}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220803 02:50:39.076" endtime="20220803 02:50:39.077"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${expected_amount}</arg>
+<arg>${actual_amount}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20220803 02:50:39.077" level="INFO">Argument types are:
+&lt;class 'str'&gt;
+&lt;class 'int'&gt;</msg>
+<status status="PASS" starttime="20220803 02:50:39.077" endtime="20220803 02:50:39.077"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${actual_convert_amount}</var>
+<arg>${actual_convert_amount}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220803 02:50:39.078" level="INFO">${actual_convert_amount} = 28</msg>
+<status status="PASS" starttime="20220803 02:50:39.077" endtime="20220803 02:50:39.078"/>
+</kw>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<arg>${actual_convert_amount}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<msg timestamp="20220803 02:50:39.078" level="INFO">Length is 2</msg>
+<status status="PASS" starttime="20220803 02:50:39.078" endtime="20220803 02:50:39.078"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${actual_rate}</var>
+<arg>${actual_rate}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220803 02:50:39.079" level="INFO">${actual_rate} = 0.028</msg>
+<status status="PASS" starttime="20220803 02:50:39.078" endtime="20220803 02:50:39.079"/>
+</kw>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<arg>${actual_rate}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<msg timestamp="20220803 02:50:39.079" level="INFO">Length is 5</msg>
+<status status="PASS" starttime="20220803 02:50:39.079" endtime="20220803 02:50:39.079"/>
+</kw>
+<status status="PASS" starttime="20220803 02:50:39.063" endtime="20220803 02:50:39.079"/>
+</kw>
+<status status="PASS" starttime="20220803 02:50:37.746" endtime="20220803 02:50:39.079"/>
+</test>
+<status status="PASS" starttime="20220803 02:50:37.606" endtime="20220803 02:50:39.080"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Calculate Exchange Rate API">Calculate Exchange Rate API</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.9.13 on darwin)" generated="20220803 04:20:04.118" rpa="false" schemaversion="3">
+<suite id="s1" name="FE Capco Career" source="/Users/cto/Desktop/Capco/testcases/FE_Capco_Career.robot">
+<test id="s1-t1" name="Open Capco Website" line="10">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${capco_url}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20220803 04:20:04.370" level="INFO">Opening browser 'chrome' to base url 'https://www.capco.com/careers/capco-thailand'.</msg>
+<status status="PASS" starttime="20220803 04:20:04.370" endtime="20220803 04:20:11.632"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20220803 04:20:11.632" endtime="20220803 04:20:11.781"/>
+</kw>
+<status status="PASS" starttime="20220803 04:20:04.369" endtime="20220803 04:20:11.781"/>
+</test>
+<test id="s1-t2" name="Accept All Cookies" line="14">
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${accept_cookies_btn}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220803 04:20:11.783" endtime="20220803 04:20:11.806"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${accept_cookies_btn}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220803 04:20:11.807" level="INFO">Clicking element '//button[@id='onetrust-accept-btn-handler']'.</msg>
+<status status="PASS" starttime="20220803 04:20:11.806" endtime="20220803 04:20:11.886"/>
+</kw>
+<status status="PASS" starttime="20220803 04:20:11.782" endtime="20220803 04:20:11.886"/>
+</test>
+<test id="s1-t3" name="Validate That Page Title Display FIND OUR JOB" line="27">
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${search_for_opportunity_btn}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220803 04:20:11.887" endtime="20220803 04:20:11.908"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${search_for_opportunity_btn}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220803 04:20:11.909" level="INFO">Clicking element '//a[@class='btn-big']'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20220803 04:20:12.744" level="FAIL">WebDriverException: Message: unknown error: unexpected command response
+  (Session info: chrome=103.0.5060.134)
+</msg>
+<status status="FAIL" starttime="20220803 04:20:12.742" endtime="20220803 04:20:12.749"/>
+</kw>
+<msg timestamp="20220803 04:20:12.750" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: WebDriverException: Message: unknown error: unexpected command response
+  (Session info: chrome=103.0.5060.134)
+</msg>
+<msg timestamp="20220803 04:20:12.750" level="FAIL">WebDriverException: Message: unknown error: unexpected command response
+  (Session info: chrome=103.0.5060.134)
+</msg>
+<status status="FAIL" starttime="20220803 04:20:11.908" endtime="20220803 04:20:12.750"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${find_your_job_text}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="NOT RUN" starttime="20220803 04:20:12.750" endtime="20220803 04:20:12.750"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${find_your_job_text}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20220803 04:20:12.751" endtime="20220803 04:20:12.751"/>
+</kw>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${actual_find_your_job_text}</var>
+<arg>${find_your_job_text}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20220803 04:20:12.751" endtime="20220803 04:20:12.751"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${actual_find_your_job_text}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20220803 04:20:12.751" endtime="20220803 04:20:12.751"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${expected_find_your_job_message}</arg>
+<arg>${actual_find_your_job_text}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" starttime="20220803 04:20:12.751" endtime="20220803 04:20:12.751"/>
+</kw>
+<status status="FAIL" starttime="20220803 04:20:11.887" endtime="20220803 04:20:12.752">WebDriverException: Message: unknown error: unexpected command response
+  (Session info: chrome=103.0.5060.134)
+</status>
+</test>
+<test id="s1-t4" name="Check How Many Jobs Still Open" line="36">
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${number_of_job_found_txt}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220803 04:20:12.753" endtime="20220803 04:20:16.273"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Number of job still open: ${number_of_job_found_txt}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220803 04:20:16.273" endtime="20220803 04:20:16.274"/>
+</kw>
+<status status="PASS" starttime="20220803 04:20:12.752" endtime="20220803 04:20:16.274"/>
+</test>
+<status status="FAIL" starttime="20220803 04:20:04.119" endtime="20220803 04:20:16.275"/>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="3" fail="1" skip="0" id="s1" name="FE Capco Career">FE Capco Career</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20220803 04:20:12.750" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: WebDriverException: Message: unknown error: unexpected command response
+  (Session info: chrome=103.0.5060.134)
+</msg>
+</errors>
+</robot>

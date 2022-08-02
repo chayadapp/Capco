@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.9.13 on darwin)" generated="20220803 02:49:19.350" rpa="false" schemaversion="3">
+<suite id="s1" name="Exchange Rate API" source="/Users/cto/Desktop/Capco/testcases/Exchange_Rate_API.robot">
+<test id="s1-t1" name="Verify result in case input correct source currency and correct destination currency in url" line="11">
+<kw name="Send Request Exchange Rate API" library="Exchange_Rate_API_Keywords">
+<arg>${source_currency_thb}</arg>
+<arg>${destination_currency_usd}</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>ExchangeRateAPI</arg>
+<arg>${host_url}</arg>
+<arg>disable_warnings=1</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220803 02:49:19.490" level="INFO">Creating Session using : alias=ExchangeRateAPI, url=https://thawing-river-85770.herokuapp.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220803 02:49:19.490" endtime="20220803 02:49:19.491"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${Get_Response}</var>
+<arg>alias=ExchangeRateAPI</arg>
+<arg>url=${exchange_rate_uri}/${sourceCurrency}/${destinationCurrency}</arg>
+<arg>expected_status=Anything</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220803 02:49:20.720" level="INFO">GET Request : url=https://thawing-river-85770.herokuapp.com/exchange-rate/THB/USD 
+ path_url=/exchange-rate/THB/USD 
+ headers={'User-Agent': 'python-requests/2.28.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220803 02:49:20.720" level="INFO">GET Response : url=https://thawing-river-85770.herokuapp.com/exchange-rate/THB/USD 
+ status=200, reason=OK 
+ headers={'Server': 'Cowboy', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '65', 'Etag': 'W/"41-W8LhuLb5LU0FIdPVTWNOR5tHvlQ"', 'Date': 'Tue, 02 Aug 2022 19:49:20 GMT', 'Via': '1.1 vegur'} 
+ body={"sourceCurrency":"THB","destinationCurrency":"USD","rate":0.028} 
+ </msg>
+<msg timestamp="20220803 02:49:20.720" level="INFO">${Get_Response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220803 02:49:19.491" endtime="20220803 02:49:20.720"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${status_code}</arg>
+<arg>${Get_Response.status_code}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20220803 02:49:20.722" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20220803 02:49:20.721" endtime="20220803 02:49:20.722"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${response_body}</arg>
+<arg>${Get_Response.json()}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20220803 02:49:20.724" level="INFO">${response_body} = {'sourceCurrency': 'THB', 'destinationCurrency': 'USD', 'rate': 0.028}</msg>
+<status status="PASS" starttime="20220803 02:49:20.722" endtime="20220803 02:49:20.724"/>
+</kw>
+<status status="PASS" starttime="20220803 02:49:19.490" endtime="20220803 02:49:20.724"/>
+</kw>
+<kw name="Validate Status Code Should Be Correct" library="Exchange_Rate_API_Keywords">
+<arg>200</arg>
+<arg>${status_code}</arg>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${expected_status_code}</arg>
+<arg>${actual_status_code}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20220803 02:49:20.725" level="INFO">Argument types are:
+&lt;class 'str'&gt;
+&lt;class 'int'&gt;</msg>
+<status status="PASS" starttime="20220803 02:49:20.725" endtime="20220803 02:49:20.726"/>
+</kw>
+<status status="PASS" starttime="20220803 02:49:20.724" endtime="20220803 02:49:20.726"/>
+</kw>
+<kw name="Validate Response Body Should Be Correct" library="Exchange_Rate_API_Keywords">
+<arg>${source_currency_thb}</arg>
+<arg>${destination_currency_usd}</arg>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${actual_source_currency}</arg>
+<arg>${response_body['sourceCurrency']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20220803 02:49:20.728" level="INFO">${actual_source_currency} = THB</msg>
+<status status="PASS" starttime="20220803 02:49:20.726" endtime="20220803 02:49:20.728"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${actual_destination_currency}</arg>
+<arg>${response_body['destinationCurrency']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20220803 02:49:20.730" level="INFO">${actual_destination_currency} = USD</msg>
+<status status="PASS" starttime="20220803 02:49:20.728" endtime="20220803 02:49:20.730"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${actual_rate}</arg>
+<arg>${response_body['rate']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20220803 02:49:20.732" level="INFO">${actual_rate} = 0.028</msg>
+<status status="PASS" starttime="20220803 02:49:20.730" endtime="20220803 02:49:20.732"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${expected_source_currency}</arg>
+<arg>${actual_source_currency}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220803 02:49:20.732" endtime="20220803 02:49:20.733"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${expected_destination_currency}</arg>
+<arg>${actual_destination_currency}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220803 02:49:20.733" endtime="20220803 02:49:20.733"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${actual_rate}</var>
+<arg>${actual_rate}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220803 02:49:20.734" level="INFO">${actual_rate} = 0.028</msg>
+<status status="PASS" starttime="20220803 02:49:20.733" endtime="20220803 02:49:20.734"/>
+</kw>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<arg>${actual_rate}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<msg timestamp="20220803 02:49:20.734" level="INFO">Length is 5</msg>
+<status status="PASS" starttime="20220803 02:49:20.734" endtime="20220803 02:49:20.734"/>
+</kw>
+<status status="PASS" starttime="20220803 02:49:20.726" endtime="20220803 02:49:20.734"/>
+</kw>
+<status status="PASS" starttime="20220803 02:49:19.489" endtime="20220803 02:49:20.734"/>
+</test>
+<status status="PASS" starttime="20220803 02:49:19.353" endtime="20220803 02:49:20.735"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Exchange Rate API">Exchange Rate API</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
